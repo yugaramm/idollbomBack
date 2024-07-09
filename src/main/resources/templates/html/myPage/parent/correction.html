@@ -13,7 +13,7 @@
     <link rel="stylesheet" th:href="@{/css/modal/password-modify.css}" />
     <!-- 프로필 변경 css -->
     <link rel="stylesheet" th:href="@{/css/modal/profile-modify.css}" />
-    
+
     <title>iDollbom_마이페이지</title>
 </head>
 
@@ -27,33 +27,33 @@
             <div class="incontainer">
                 <div class="menu-bar">
                     <div class="menu-bar-option">
-                        <a th:href="@{/templates/html/mypage/parent/myKids.html}">아이정보 추가</a>
+                        <a th:href="@{/ParentMyPage/kids}">아이정보 추가</a>
                     </div>
                     <div class="menu-bar-option">
                         <p>내정보 수정</p>
                     </div>
                     <hr class="custom-hr">
                     <div class="menu-bar-option">
-                        <a th:href="@{/templates/html/mypage/parent/hateUser.html}">신고 목록</a>
+                        <a th:href="@{/ParentMyPage/reportPage}">신고 목록</a>
                     </div>
                     <div class="menu-bar-option">
-                        <a th:href="@{/templates/html/mypage/parent/myFavoriteClass.html}">수업찜 목록</a>
+                        <a >수업찜 목록</a>
                     </div>
                     <div class="menu-bar-option">
-                        <a th:href="@{/html/mypage/parent/myPost.html}">내가쓴 게시글</a>
+                        <a th:href="@{/ParentMyPage/myPost}">내가쓴 게시글</a>
                     </div>
                     <div class="menu-bar-option">
-                        <a th:href="@{/templates/html/mypage/parent/myAsk.html}">내 문의</a>
+                        <a >내 문의</a>
                     </div>
                     <div class="menu-bar-option">
-                        <a th:href="@{/templates/html/mypage/parent/myrReview.html}">내 리뷰</a>
+                        <a th:href="@{/ParentMyPage/Review}">내 리뷰</a>
                     </div>
                     <hr class="custom-hr">
                     <div class="menu-bar-option">
-                        <a th:href="@{/templates/html/mypage/parent/Payment copy.html}">결제 내역</a>
+                        <a >결제 내역</a>
                     </div>
                     <div class="menu-bar-option">
-                        <a th:href="@{/templates/html/mypage/parent/mail.html}">쪽지함</a>
+                        <a th:href="@{/ParentMyPage/myNote}">쪽지함</a>
                     </div>
                     <!-- 프로필 -->
                     <div class="myprofile">
@@ -73,19 +73,21 @@
                 </div>
                 <!-- 내정보수정 -->
                 <div class="mainbox">
-                    <form class="reset-form">
+                    <form  method="post" th:action="@{/ParentMyPage/updateMyInfo}" class="reset-form" enctype="multipart/form-data" th:object="${parentInfo}">
+                        <input type="file" id="myfie" onchange="handleFileChange(this)" style="display: none;" multiple="multiple" name="files"/>
+                        <input type="hidden" id="hiddenPassword" name="hiddenPassword" value="">
                         <div class="reset">
                             <div> 이름</div>
-                            <input type="textarea">
+                            <input type="text" th:field="*{parentName}">
                         </div>
-                        <div class="reset">
+                        <div class="reset" >
                             <div>휴대폰번호</div>
-                            <input type="textarea">
+                            <input type="text" th:field="*{parentPhoneNumber}">
                         </div>
 
                         <div class="reset">
                             <div> 별명</div>
-                            <input type="textarea">
+                            <input type="text" th:field="*{parentNickname}">
                         </div>
                         <div class="reset">
                             <div>비밀번호 변경</div>
@@ -98,13 +100,24 @@
 
                         <div class="reset" id="pro-add">
                             <div>주소지</div>
-                            <button type="button" class="address">주소지 변경</button>
+                            <button type="button" class="address" onclick="execPostCode();">주소지 변경</button>
+                        </div>
+                        <!--            주소담는곳-->
+                        <div class="form-group">
+                            <input class="form-control" style="width: 40%; display: inline;" placeholder="우편번호" name="addr1" id="addr1" type="text" readonly="readonly" >
+                            <button type="button" class="btn btn-default" ><i class="fa fa-search"></i> 우편번호 찾기</button>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" style="top: 5px;" placeholder="도로명 주소" name="addr2" id="addr2" type="text" readonly="readonly" th:field="*{parentAddress}"/>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" placeholder="상세주소" name="addr3" id="addr3" type="text"  />
                         </div>
                         <div class="submit">
                             <!-- 내 정보를 수정하면 어느 페이지로 이동해야 되나?? -->
-                            <a href="#">
-                                <button class="submit-button" type="button">제출</button>
-                            </a>
+
+                                <button class="submit-button" type="submit">제출</button>
+
                         </div>
                     </form>
                 </div>
@@ -113,29 +126,29 @@
             <form action="#" method="get">
                 <div class="modal-pwd">
                     <div class="pwd-body">
-                        <div class="header">
-                            <img class="img" src="../../images/logo.png" alt="로고">
-                            <h3 id="title">비밀번호 변경</h3>
-                            <button type="button" id="close-btn"><img class="x-btn" src="../../images/closebtn.png" alt="닫기버튼"></button>
-                        </div>
-                        <div class="mb-3">
-                            <label for="childName" class="form-label">현재 비밀번호</label>
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label for="childName" class="form-label">비밀번호</label>
-                            <input type="text" class="form-control" >
-                        </div>
-                        <div class="mb-3">
-                            <label for="childInstruct" class="form-label">비밀번호 확인</label>
-                            <input type="text" class="form-control" >
-                        </div>
-        
-                        <div class="modal-btn">
-                            <!-- 추가하기를 누르면 새로운 페이지로 이동 -->
-                            <button type="button" class="close-btn btn">취소하기</button>
-                            <button class="regist-btn btn" type="submit">수정하기</button>
-                        </div>
+                            <div class="header">
+                                <img class="img" src="../../images/logo.png" alt="로고">
+                                <h3 id="title">비밀번호 변경</h3>
+                                <button type="button" id="close-btn"><img class="x-btn" src="../../images/closebtn.png" alt="닫기버튼"></button>
+                            </div>
+                            <div class="mb-3">
+                                <label for="childName" class="form-label">현재 비밀번호</label>
+                                <input id="childName"  type="password" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="presentNew" class="form-label">비밀번호</label>
+                                <input id="presentNew" type="password" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="childInstruct" class="form-label">비밀번호 확인</label>
+                                <input id="childInstruct" type="password" class="form-control" >
+                            </div>
+
+                            <div class="modal-btn">
+                                <!-- 추가하기를 누르면 새로운 페이지로 이동 -->
+                                <button type="button" class="close-btn btn">취소하기</button>
+                                <button class="regist-btn btn" type="button" onclick="test(this)">수정하기</button>
+                            </div>
                     </div>
                 </div>
             </form>
@@ -145,44 +158,67 @@
                 <div class="modal-profile">
                     <div class="profile-center-body profile-modify-body">
                         <div class="header">
-                            <a href="#"><img class="img" src="../../images/logo.png" alt="로고"></a>
+                            <a href="#"><img class="img" src="/images/logo.png" alt="로고"></a>
                             <h3 id="title">프로필 등록</h3>
-                            <button id="close-profile-btn"><img class="x-btn" src="../../images/closebtn.png" alt="닫기버튼"></button>
+                            <button id="close-profile-btn"><img class="x-btn" src="/images/closebtn.png" alt="닫기버튼"></button>
                         </div>
                         <!-- 이미지 미리보기 -->
                         <div class="profile-img-wrap">
                             <img id="preview" alt="미리보기" class="img-profile">
                             <label class="input-file-button" for="input-file">upload</label>
-                            <input type="file" id="input-file" onchange="prevImage(this)" style="display: none;"/>
+                            <input type="file" id="input-file" onchange="prevImage(this)"  style="display: none;"/>
                         </div>
         
                         <div class="modal-btn">
                             <!-- 추가하기를 누르면 새로운 페이지로 이동 -->
-                            <button class="close-profile-btn btn">취소하기</button>
-                            <button class="add-btn btn" type="submit">등록하기</button>
+                            <button id="imgnon" class="close-profile-btn btn">취소하기</button>
+                            <button id="submit" class="add-btn btn" >등록하기</button>
                         </div>
                     </div>
                 </div>
             </form>
+
+
+<!--            주소api-->
+            <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+            <script>
+                function execPostCode() {
+                    new daum.Postcode({
+                        oncomplete: function (data) {
+                            var fullRoadAddr = data.roadAddress;
+                            var extraRoadAddr = '';
+
+                            if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+                                extraRoadAddr += data.bname;
+                            }
+                            if (data.buildingName !== '' && data.apartment === 'Y') {
+                                extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                            }
+                            if (extraRoadAddr !== '') {
+                                extraRoadAddr = ' (' + extraRoadAddr + ')';
+                            }
+                            if (fullRoadAddr !== '') {
+                                fullRoadAddr += extraRoadAddr;
+                            }
+
+                            console.log(data.zonecode);
+                            console.log(fullRoadAddr);
+
+                            // 우편번호와 주소 정보를 해당 필드에 넣기
+                            document.getElementById('addr1').value = data.zonecode; // 우편번호
+                            document.getElementById('addr2').value = fullRoadAddr; // 도로명 주소
+                            document.getElementById('addr3').value = ''; // 상세주소 초기화
+
+                        }
+                    }).open();
+                }
+            </script>
         </div>
     </div>
 
 <div id="footer" th:replace="~{/layout/footer :: footer}"></div>
-<script>
-          // 이미지를 미리 불러오는 js
-          function prevImage(input) {
-                if (input.files && input.files[0]) {
-                        var reader = new FileReader();
-                        reader.onload = function(e) {
-                            document.getElementById('preview').src = e.target.result;
-                        };
-                    reader.readAsDataURL(input.files[0]);
-                } else {
-                    document.getElementById('preview').src = "";
-                }
-            }
-    </script>
-    <script src="../../js/password-modal.js"></script>
-    <script src="../../js/profile-modal.js"></script>
+<script src="/js/password-modal.js"></script>
+<script src="/js/profile-modal.js"></script>
+<script src="/js/correction.js"></script>
 </body>
 </html>

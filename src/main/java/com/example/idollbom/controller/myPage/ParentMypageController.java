@@ -1,5 +1,7 @@
 package com.example.idollbom.controller.myPage;
+import com.example.idollbom.domain.dto.logindto.ParentDTO;
 import com.example.idollbom.domain.dto.myPagedto.parentdto.kidDTO;
+import com.example.idollbom.domain.dto.myPagedto.parentdto.mailDTO;
 import com.example.idollbom.domain.vo.*;
 import com.example.idollbom.service.myPageservice.parentservice.*;
 import lombok.RequiredArgsConstructor;
@@ -7,7 +9,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
@@ -24,6 +28,7 @@ public class ParentMypageController {
     private final myPostService myPostService;
     private final reviewService reviewService;
     private final noteService noteService;
+    private final parentInfoService parentInfoService;
 
 //  kid 페이지로 이동
     @GetMapping("/kids")
@@ -112,8 +117,23 @@ public class ParentMypageController {
 //    쪽지 목록으로 이동
     @GetMapping("/myNote")
     public String selectMyNoteList(Model model){
-        List<noteVO> noteList = noteService.selectAllMyNote();
+        List<mailDTO> noteList = noteService.selectAllMyNote();
         model.addAttribute("myNotes", noteList);
         return "html/myPage/parent/mail";
+    }
+
+    //  내정보 받아오기
+    @GetMapping("/myInformation")
+    public String selectMailId(Model model){
+       ParentVO parentInfo = parentInfoService.selectParentInfo();
+       model.addAttribute("parentInfo", parentInfo);
+        return "html/myPage/parent/correction";
+    }
+
+    // 내정보 update
+    @PostMapping("/updateMyInfo")
+    public String updateParentInfo(ParentDTO parentDTO, @RequestParam("files") MultipartFile files) throws IOException {
+        parentInfoService.update(parentDTO,files);
+        return "redirect:/ParentMyPage/myInformation";
     }
 }

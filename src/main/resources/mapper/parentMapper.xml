@@ -23,4 +23,11 @@
         where parent_email = #{parentEmail}
     </select>
 
+    <update id="updateInfo">
+        update parent
+        set parent_password=#{parentPassword}, parent_name=#{parentName}, parent_phone_number=#{parentPhoneNumber},parent_address = #{parentAddress},parent_profile_image_url=#{parentProfileImageUrl},
+            parent_nickname=#{parentNickName}
+        where parent_number =#{parentNumber}
+    </update>
+
 </mapper>

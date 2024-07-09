@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.idollbom.mapper.myPagemapper.parentmapper.myPostMapper">
-    <select id="selectAll">
-        select * from parent_post
+<mapper namespace="com.example.idollbom.mapper.myPagemapper.parentmapper.infoMapper">
+    <select id="selectMyInfo" parameterType="Long">
+        select * from PARENT
         where parent_number = #{parentNumber}
     </select>
+
 </mapper>

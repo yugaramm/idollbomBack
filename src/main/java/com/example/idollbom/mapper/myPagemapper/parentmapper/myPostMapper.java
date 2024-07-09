@@ -7,5 +7,5 @@ import java.util.List;
 
 @Mapper
 public interface myPostMapper {
-   List<myPostVO> selectAll();
+   List<myPostVO> selectAll(Long parentNumber);
 }

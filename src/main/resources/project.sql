@@ -400,6 +400,12 @@ VALUES(0, '', 0);
 SELECT * FROM USER_SEQUENCES;
 
 
+SELECT *
+FROM class_save cv
+         JOIN class cl ON cv.class_number = cl.class_number
+         JOIN img it ON it.class_number = cv.class_number
+WHERE cv.parent_number = 4;
+
 
 
 

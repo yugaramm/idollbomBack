@@ -6,4 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface ParentMapper {
      void insert(ParentVO vo);
      ParentVO selectOne(String userId);
+
+     void updateInfo(ParentVO parentVO);
 }

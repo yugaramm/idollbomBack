@@ -7,5 +7,5 @@ import java.util.List;
 
 @Mapper
 public interface classSaveMapper {
-    List<classSaveVO> selectAll();
+    List<classSaveVO> selectAll(Long parentId);
 }

@@ -3,6 +3,10 @@
 
 <mapper namespace="com.example.idollbom.mapper.myPagemapper.parentmapper.classSaveMapper">
     <select id="selectAll">
-        select * from class_save
+        SELECT *
+        FROM class_save cv
+                 JOIN class cl ON cv.class_number = cl.class_number
+                 JOIN img im ON im.class_number = cv.class_number
+        WHERE cv.parent_number = #{parentNumber};
     </select>
 </mapper>

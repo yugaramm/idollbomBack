@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="/css/myPage/parent/mypage_payment.css">
     <link rel="stylesheet" href="/css/layout/header.css">
     <link rel="stylesheet" href="/css/layout/footer.css">
+    <link rel="stylesheet" href="/css/modal/modalstyle.css" />
+    <link rel="stylesheet" href="/css/modal/letter.css" />
+    <script src="/js/mail.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>iDollbom_마이페이지</title>
 </head>
 
@@ -71,20 +75,42 @@
                             <thead>
                                 <tr>
                                     <th>번호</th>
+                                    <th>강사 이름</th>
                                     <th>쪽지 내용</th>
                                     <th>전송 날짜</th>
                                 </tr>
                             </thead>
-                            <tbody th:if="${not #lists.isEmpty(myNotes)}">
-                                <tr th:each="note, stat : ${myNotes}">
-                                    <td th:text="${stat.count}">01</td>
-                                    <td th:text="${note.parentNoteContent}">요</td>
+                            <tbody th:if="${not #lists.isEmpty(myNotes)}" >
+                            <tr th:each="note, stat : ${myNotes}" th:value="${note.parentNoteNumber}" class="mail"
+                                th:data-mail-number="${note.parentNoteNumber}" onclick="openModal(this)">
+
+                                    <td th:text="${stat.count}"></td>
+                                    <td th:text="${note.proName}"></td>
+                                    <td th:text="${note.parentNoteContent}"></td>
                                     <td th:text="${#temporals.format(note.parentNoteSendTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
+                    <div class="modal" >
+                        <div class="modal-body profile-body">
+                            <div class="header">
+                                <img class="img" src="/images/logo.png" alt="로고">
+                                <h3 id="title">쪽지 보기</h3>
+                                <button id="close-btn"><img class="x-btn" src="/images/closebtn.png" alt="닫기버튼"></button>
+                            </div>
+                            <div class="mb-3">
+                                <label for="parent" class="form-label">강사</label>
+                                <input type="parent" id="parent" class="form-control" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="textarea" class="form-label">내용</label>
+                                <textarea id="textarea" class="form-control" placeholder="수업 후기를 작성해주세요." rows="6"
+                                          maxlength="500"></textarea>
+                            </div>
+                        </div>
+                    </div>
             </div>
         </div>
     </div>

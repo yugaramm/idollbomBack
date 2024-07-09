@@ -1,5 +1,6 @@
 package com.example.idollbom.service.myPageservice.parentservice;
 
+import com.example.idollbom.domain.dto.myPagedto.parentdto.mailDTO;
 import com.example.idollbom.domain.vo.ParentVO;
 import com.example.idollbom.domain.vo.noteVO;
 import com.example.idollbom.mapper.loginmapper.ParentMapper;
@@ -19,13 +20,19 @@ public class noteServiceImpl implements noteService {
     private final noteMapper noteMapper;
     private final  ParentMapper parentMapper;
     @Override
-    public List<noteVO> selectAllMyNote() {
+    public  List<mailDTO> selectAllMyNote() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String currentUserName = userDetails.getUsername();
 
+//      parent VO 찾아서 아이디 찾기
         ParentVO parent = parentMapper.selectOne(currentUserName);
+        List<mailDTO> maildto = noteMapper.selectNoteById(parent.getParentNumber());
+        return maildto;
+    }
 
-        return noteMapper.selectNoteById(parent.getParentNumber());
+    @Override
+    public mailDTO selectOneMail(Long mailId) {
+        return noteMapper.selectNoteByNoteId(mailId);
     }
 }
