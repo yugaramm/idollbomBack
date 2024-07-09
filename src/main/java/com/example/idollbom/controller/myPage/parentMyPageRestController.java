@@ -31,7 +31,7 @@ public class parentMyPageRestController {
        return kidsService.selectKidById(childNumber);
     }
 
-    //  아이update
+    //  아이 update
     @PutMapping("/updateKids/{childNumber}")
     public ResponseEntity<?> updateKid(@PathVariable("childNumber") Long childNumber, @RequestBody kidDTO updatedKid) {
 //      날짜 -> 나이로 변환

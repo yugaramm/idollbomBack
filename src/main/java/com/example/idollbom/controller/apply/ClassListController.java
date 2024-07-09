@@ -2,7 +2,6 @@ package com.example.idollbom.controller.apply;
 
 import com.example.idollbom.domain.dto.applydto.ClassListDTO;
 import com.example.idollbom.service.applyservice.ClassListService;
-import jdk.jfr.Category;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -21,17 +20,17 @@ public class ClassListController {
 
     private final ClassListService classListService;
 
-    // 페이지 전부 페이징 처리 구현하기
-    // 돌봄 페이지, default는 등하원으로
-   @GetMapping("/classcare")
-    public String classCare(@RequestParam(value = "category", defaultValue = "등/하원") String category, Model model) {
-       List<ClassListDTO> classListDTO = classListService.findAllClass(category);
-       int count = classListService.classCount(category);
+    // 돌봄 페이지
+    @GetMapping("/classcare")
+    public String classCare(Model model) {
+        List<ClassListDTO> classListDTO = classListService.findAllClass();
+        int count = classListService.classCount();
 
         model.addAttribute("count", count);
         model.addAttribute("classLists", classListDTO);
         return "/html/apply/class_list_care";
     }
+
 
     // 운동 페이지 - default 축구
     @GetMapping("/classsport")
@@ -82,4 +81,13 @@ public class ClassListController {
     }
 
     // 수업 상세보기 페이지
+    // 수업 상세보기
+//    @GetMapping("/detail/{proNumber}")
+//    public String detail(@PathVariable("proNumber") Long proNumber, Model model) {
+
+//        ClassDetailDTO class_info = classDetailService.classDetail(proNumber, classNumber);
+//        model.addAttribute("class_info", class_info);
+
+//        return "/html/parent/studyDetail";
+//    }
 }

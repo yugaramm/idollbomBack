@@ -8,4 +8,6 @@ import java.util.List;
 @Service
 public interface classSaveService {
     List<classSaveVO> selectClassList();
+
+    int saveClass(Long classNumber, Long parentNumber);
 }

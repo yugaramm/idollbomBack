@@ -9,4 +9,10 @@
                  JOIN img im ON im.class_number = cv.class_number
         WHERE cv.parent_number = #{parentNumber};
     </select>
+
+    <!-- 수업 찜목록 추가 -->
+    <insert id="insertClass">
+        INSERT INTO CLASS_SAVE (CLASS_NUMBER, PARENT_NUMBER)
+        VALUES(#{classNumber}, #{parentNumber});
+    </insert>
 </mapper>

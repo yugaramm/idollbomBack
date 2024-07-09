@@ -29,6 +29,7 @@ public class ParentMypageController {
     private final reviewService reviewService;
     private final noteService noteService;
     private final parentInfoService parentInfoService;
+    private final classSaveService classSaveService;
 
 //  kid 페이지로 이동
     @GetMapping("/kids")
@@ -136,4 +137,19 @@ public class ParentMypageController {
         parentInfoService.update(parentDTO,files);
         return "redirect:/ParentMyPage/myInformation";
     }
+
+    // 수업 찜 목록 추가
+    @PostMapping("/favoriteClass")
+    public String selectFavoriteClass(@RequestParam(value= "classNumber") Long classNumber,
+                                      @RequestParam(value= "parentNumber") Long parentNumber,
+                                      Model model){
+        int insertRow = classSaveService.saveClass(classNumber, parentNumber);
+
+
+
+        model.addAttribute("");
+        return "html/myPage/parent/myFavoriteClass";
+    }
+
+
 }

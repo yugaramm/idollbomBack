@@ -29,4 +29,10 @@ public class classSaveServiceImpl implements classSaveService {
         ParentVO parent = parentMapper.selectOne(currentUserName);
         return classSaveMapper.selectAll(parent.getParentNumber());
     }
+
+    // 수업 찜 목록 추가
+    @Override
+    public int saveClass(Long classNumber, Long parentNumber) {
+        return classSaveMapper.insertClass(classNumber, parentNumber);
+    }
 }

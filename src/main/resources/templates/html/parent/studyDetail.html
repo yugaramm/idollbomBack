@@ -1,68 +1,18 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../../../static/css/layout/header.css" />
-  <link rel="stylesheet" href="../../../static/css/layout/footer.css" />
-  <link rel="stylesheet" href="../../../static/css/parent/studyDetail.css" />
+  <link rel="stylesheet" th:href="@{/css/layout/header.css}" />
+  <link rel="stylesheet" th:href="@{/css/layout/footer.css}" />
+  <link rel="stylesheet" th:href="@{/css/parent/studyDetail.css}" />
   <title>수업 상세보기 페이지(부모)</title>
 </head>
 
 <body>
   <!-- 헤더 -->
-  <header id="header">
-    <div class="header_wrap">
-      <h1><a href="../html/main/index_parents.html"><img src="../../../static/image/logo.png" alt="IDOLL봄"></a></h1>
-
-      <nav>
-        <ul class="gnb">
-          <li>
-            <a href="../../html/main/index_parents.html">부모님</a>
-            <ul>
-              <li><a href="../../html/matching.html">매칭</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="../../html/main/index_pro.html">전문가</a>
-          </li>
-          <li>
-            <a href="../../html/class_list.html">신청하기</a>
-            <ul>
-              <li><a href="#">돌봄</a></li>
-              <li><a href="#">교육</a></li>
-              <li><a href="#">운동</a></li>
-              <li><a href="#">예능</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="../../html/community_parent.html">커뮤니티</a>
-            <ul>
-              <li><a href="../../html/community_parent.html">자유게시판</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="../../html/notice.html">고객센터</a>
-            <ul>
-              <li><a href="../../html/question.html">문의하기</a></li>
-              <li><a href="../../html/notice.html">공지사항</a></li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
-      <div class="side">
-        <p>
-          <button onclick="window.location='../mypage/mypage_mail.html'">
-            <img src="../../../static/image/Alarm.png" alt="알림">
-          </button>
-        </p>
-        <p><a href="../../html/mypage/mypage_correction.html">마이페이지</a></p>
-        <p><a href="../../html/login/loginpage.html">로그인 /</a></p>
-        <p><a href="../../html/login/registerpage.html">회원가입</a></p>
-      </div>
-    </div>
-  </header>
+  <div th:replace="~{/layout/header_parents :: header_parents}"></div>
 
   <!-- 수업 상세보기 페이지 -->
   <div id="main-wrapper">
@@ -73,16 +23,16 @@
       <div class="carousel-container">
         <ul class="slider-box">
           <li class="slider-item">
-            <img src="../../../static/image/index_pro_find.jpg" alt="slider-img4" />
+            <img th:src="@{/image/index_pro_find.jpg}" alt="slider-img4" />
           </li>
           <li class="slider-item">
-            <img src="../../../static/image/a4c03f0c5f8fc.png" alt="slider-img1" />
+            <img th:src="@{/image/a4c03f0c5f8fc.png}" alt="slider-img1" />
           </li>
           <li class="slider-item">
-            <img src="../../../static/image/cb157270a5310.jpeg" alt="slider-img2" />
+            <img th:src="@{/image/cb157270a5310.jpeg}" alt="slider-img2" />
           </li>
           <li class="slider-item">
-            <img src="../../../static/image/index_matching.jpg" alt="slider-img3" />
+            <img th:src="@{/image/index_matching.jpg}" alt="slider-img3" />
           </li>
         </ul>
         <button class="left slider-btn"><</button>
@@ -94,9 +44,9 @@
         <h1>카테고리 분류</h1>
         <div>
           <!-- 카테고리(대) -->
-          <p>돌봄</p>
+          <p th:text="${class_info.classCategoryBig}">돌봄</p>
           <!-- 카테고리(소) -->
-          <p>등/하원 도움</p>
+          <p th:text="${class_info.classCategorySmall}">등/하원 도움</p>
         </div>
       </div>
 
@@ -170,24 +120,26 @@
     </div>
 
     <!-- 오른쪽 필수정보 영역 -->
-    <div class="detail-right-area">
+    <div class="detail-right-area" th:object="${class_info}">
       <!-- 강사명 및 프로필 보기 버튼 -->
       <div class="pro-profile-wrap">
         <h1>강사명</h1>
-        <p>이근</p>
-        <a href="#">프로필 보기</a>
+        <p th:text="*{proName}">이근</p>
+        <!-- 해당 강사의 프로필 보기 페이지로 넘어갈 때 주소에 넘겨줄 데이터만 작성함. -->
+        <!-- 컨트롤러는 만들어지지 않아서 아직 작성하지 않음. -->
+        <a th:href="@{/{proNumber}(proNumber=*{proNumber})}">프로필 보기</a>
       </div>
 
       <!-- 수업 제목 -->
       <div class="study-title-wrap">
         <h1>수업 제목</h1>
-        <p>여름방학 학습돌봄</p>
+        <p th:text="*{className}">여름방학 학습돌봄</p>
       </div>
 
       <!-- 수업 내용 -->
       <div class="study-content-wrap">
         <h1>수업 내용</h1>
-        <p>방학 숙제나 부족했던 교과 진도 따라잡기, 1시간은 수학, 국어 <br />
+        <p th:text="*{classContent}">방학 숙제나 부족했던 교과 진도 따라잡기, 1시간은 수학, 국어 <br />
           등 아이에게 필요한 수업을 자란다 쌤과 1:1 맞춤으로 학습해요. <br />
           2시간은 아이가 좋아하는 놀이로 충분히 놀면서 학기 중 스트레스
           날리고 학습 효과까지 UP!!
@@ -197,19 +149,21 @@
       <!-- 수업 날짜 및 시간 -->
       <div class="study-date-wrap">
         <h1>수업 날짜 및 시간</h1>
-        <span>2024-05-25 / 18시</span>
+        <span th:text="*{classRegisterDate}">2024-05-25 / 18시</span>
       </div>
 
       <!-- 결제 금액 -->
       <div class="payAmount-wrap">
         <h1>결제 금액</h1>
-        <p>25,000원</p>
+        <p th:text="*{classPaymentAccount}">25,000원</p>
       </div>
 
       <!-- 수업 결제, 수업 찜하기 버튼 -->
       <div class="payment-button-wrap">
-        <button>수업 결제하기</button>
-        <button>수업 찜하기</button>
+        <a href="#">수업 결제하기</a>
+        <a th:href="@{/ParentMyPage/favoriteClass(classNumber=${class_info.classNumber}, parentNumber=${class_info.parentNumber})}">
+          수업 찜하기
+        </a>
       </div>
 
     </div>
@@ -219,49 +173,13 @@
   <a class="move-to-top" href="#top"><i class="fa-solid fa-angles-up"></i></a>
 
   <!-- 푸터 -->
-  <footer id="footer">
-    <div class="footer_wrap">
-      <img src="../../images/footer_logo.png" alt="IDOLL봄">
-      <div>
-        <div>
-          <p>사업자등록번호 779-81-00425</p>
-          <p>통신판매업신고 2021-서울강남04707</p>
-        </div>
-        <address><b>본사</b> : 서울특별시 강남구 테헤란로 152 강남파이낸스센터빌딩 40층 자란다</address>
-        <div>
-          <p>(주)자란다 대표 김성환</p>
-          <p>개인정보보호책임자 김택주</p>
-        </div>
-      </div>
-
-      <div>
-        <ul>
-          <li><a href="#">이용약관</a></li>
-          <li><a href="#">개인정보처리방침</a></li>
-          <li><a href="#">고객지원</a></li>
-          <li><a href="#">운영관리방침</a></li>
-          <li><a href="#">이메일주소</a></li>
-        </ul>
-        <ul>
-          <li><a href="https://blog.naver.com/jaranblog" target="_blank">
-            <img src="../../../static/image/footer_social_blog.png" alt="블로그 바로가기"></a>
-          </li>
-          <li><a href="https://www.instagram.com/jaranda__official" target="_blank">
-            <img src="../../../static/image/footer_social_insta.png" alt="인스타그램 바로가기"></a>
-          </li>
-          <li><a href="https://www.youtube.com/channel/UCTXkxn1OlVvljxEe-hbd3Vg" target="_blank">
-            <img src="../../../static/image/footer_social_youtube.png" alt="유튜브 바로가기"></a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </footer>
+  <div th:replace="~{/layout/footer :: footer}"></div>
 
   <script src="http://code.jquery.com/jquery-1.9.0rc1.js"></script>
   <!-- fontawesome 아이콘 -->
   <script src="https://kit.fontawesome.com/96adc9c597.js" crossorigin="anonymous"></script>
-  <script src="../../../static/js/motion.js"></script>
-  <script src="../../../static/js/studyDetail.js"></script>
+  <script th:src="@{/js/motion.js}"></script>
+  <script th:src="@{/js/studyDetail.js}"></script>
 </body>
 
 </html>

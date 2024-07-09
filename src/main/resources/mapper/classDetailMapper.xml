@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.idollbom.mapper.applymapper.ClassDetailMapper">
+    <!-- 수업 상세보기 조회 -->
+    <select id="selectClassByProNumber">
+        SELECT
+            CLASS.PRO_NAME,
+            CLASS.CLASS_NAME,
+            CLASS.CLASS_CATEGORY_BIG,
+            CLASS.CLASS_CATEGORY_SMALL,
+            CLASS.CLASS_CONTENT,
+            CLASS.CLASS_PAYMENT_ACCOUNT,
+            TO_CHAR(C.CLASS_REGISTER_DATE, 'YYYY-MM-DD / HH24') || '시'  AS CLASS_REGISTER_DATE
+        FROM
+            (
+                SELECT *
+                FROM PRO P JOIN CLASS C
+                    ON P.PRO_NUMBER = C.PRO_NUMBER
+                    AND C.PRO_NUMBER = #{proNumber}
+            ) CLASS
+        WHERE CLASS.CLASS_NUMBER = #{classNumber}
+    </select>
+
+</mapper>

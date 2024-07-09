@@ -376,7 +376,7 @@ html{
   margin: 0 20px;
 }
 
-.payment-button-wrap > button{
+.payment-button-wrap > a{
   padding: 5px 10px;
   border-radius: 10px;
   width: 45%;
@@ -384,16 +384,16 @@ html{
   transition: 0.3s;
 }
 
-.payment-button-wrap > button:nth-child(1){
+.payment-button-wrap > a:nth-child(1){
   background-color: #00B455;
 }
-.payment-button-wrap > button:nth-child(2){
+.payment-button-wrap > a:nth-child(2){
   background-color: #e7356e;
 }
 
-.payment-button-wrap > button:nth-child(1):hover{
+.payment-button-wrap > a:nth-child(1):hover{
   background-color: #00d564;
 }
-.payment-button-wrap > button:nth-child(2):hover{
+.payment-button-wrap > a:nth-child(2):hover{
   background-color: #ff0051;
 }
