@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.idollbom.mapper.applymapper.ClassMapper">
+    <insert id="saveClass">
+        INSERT INTO CLASS
+        (CLASS_NUMBER, CLASS_NAME, CLASS_CATEGORY_BIG, CLASS_CATEGORY_SMALL, CLASS_CONTENT, CLASS_PAYMENT_ACCOUNT, PRO_NUMBER)
+        VALUES(seq_project.nextval, #{className}, #{classCategoryBig}, #{classCategorySmall}, #{classContent}, #{classPaymentAccount}, #{proNumber});
+    </insert>
+
+</mapper>

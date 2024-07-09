@@ -3,276 +3,203 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../../../static/css/layout/header.css" />
-  <link rel="stylesheet" href="../../../static/css/layout/footer.css" />
-  <link rel="stylesheet" href="../../../static/css/pro/registerForm.css" />
+  <link rel="stylesheet" th:href="@{/css/pro/registerForm.css}">
+  <link rel="stylesheet" th:href="@{/css/layout/header.css}">
+  <link rel="stylesheet" th:href="@{/css/layout/footer.css}">
   <title>수업등록(전문가) 페이지</title>
 </head>
 
 <body>
-  <!-- 헤더 -->
-  <header id="header">
-    <div class="header_wrap">
-      <h1><a href="../html/main/index_parents.html"><img src="../../../static/image/logo.png" alt="IDOLL봄"></a></h1>
-      <nav>
-        <ul class="gnb">
-          <li>
-            <a href="./registerForm.html">수업등록</a>
-          </li>
-          <li>
-            <a href="./childfind.html">아이찾기</a>
-          </li>
-          <li>
-            <a href="./community_pro.html">자유 게시판</a>
-          </li>
-          <li>
-            <a href="./notice.html">공지사항</a>
-          </li>
-        </ul>
-      </nav>
-      <div class="side">
-        <p>
-          <button onclick="window.location='../mypage/mypage_mail.html'">
-            <img src="../../../static/image/Alarm.png" alt="알림">
-          </button>
-        </p>
-        <p><a href="./propage/propage_fixprofile.html">마이페이지</a></p>
-        <p><a href="./login/loginpage.html">로그인 /</a></p>
-        <p><a href="./login/registerpage.html">회원가입</a></p>
-      </div>
-    </div>
-  </header>
+<!-- 헤더 -->
+<div th:replace="~{/layout/header_pro :: #header}"></div>
 
-  <!-- 수업등록 페이지 메인 -->
-  <div id="register-form-wrapper">
-    <!-- 수업등록 타이틀 -->
-    <div class="study-page-title">
-      <h1>수업 등록하기</h1>
+<!-- 수업등록 페이지 메인 -->
+<div id="register-form-wrapper">
+  <!-- 수업등록 타이틀 -->
+  <div class="study-page-title">
+    <h1>수업 등록하기</h1>
+  </div>
+
+  <!-- 수업등록 폼 -->
+  <form id="register-form" th:action="@{/RegisterForm/insertClass}" method="post">
+
+    <!-- 수업 제목 -->
+    <div class="study-title">
+      <label for="className">수업 제목</label>
+      <input type="text" id="className" name="className" placeholder="수업 제목 입력" required />
     </div>
 
-    <!-- 수업등록 폼 -->
-    <form id="register-form" action="#">
+    <div class="study-select">
+      <h1 class="category-title">수업 카테고리 선택하기</h1>
 
-      <!-- 수업 제목 -->
-      <div class="study-title">
-        <label for="">수업 제목</label>
-        <input type="input" name="title" placeholder="수업 제목 입력" required />
-      </div>
+      <!-- 수업 카테코리(대) 선택 -->
+      <div class="category-big">
+        <h2>카테고리(대)</h2>
+        <input id="care" type="radio" name="classCategoryBig" value="care" />
+        <label for="care">돌봄</label>
+        <input id="variety" type="radio" name="classCategoryBig" value="variety" />
+        <label for="variety">예능</label>
+        <input id="play" type="radio" name="classCategoryBig" value="play" />
+        <label for="play">놀이</label>
+        <input id="education" type="radio" name="classCategoryBig" value="education" />
+        <label for="education">교육</label>
 
-      <div class="study-select">
-        <h1 class="category-title">수업 카테고리 선택하기</h1>
-
-        <!-- 수업 카테코리(대) 선택 -->
-        <div class="category-big">
-          <h2>카테고리(대)</h2>
-          <input id="care" type="radio" name="category-item" value="care" />
-          <label for="care">돌봄</label>
-          <input id="variety" type="radio" name="category-item" value="variety" />
-          <label for="variety">예능</label>
-          <input id="play" type="radio" name="category-item" value="play" />
-          <label for="play">놀이</label>
-          <input id="education" type="radio" name="category-item" value="education" />
-          <label for="education">교육</label>
-        </div>
-
-        <!-- 수업 카테고리(소) 선택 -->
+      <!-- 수업 카테고리(소) 선택 -->
         <div class="category-small">
           <h2>카테고리(소)</h2>
-          <select id="category-wrap" name="category-wrap">
-            <option>카테고리 선택</option>
-            <option value="1">놀이터</option>
-            <option value="2">돌 던지기</option>
-            <option value="3">아이돌봄</option>
-            <option value="4">아이와 놀아주기</option>
+          <select id="classCategorySmall" name="classCategorySmall">
+            <option value="">카테고리 선택</option>
+            <option value="놀이터">놀이터</option>
+            <option value="돌 던지기">돌 던지기</option>
+            <option value="아이돌봄">아이돌봄</option>
+            <option value="아이와 놀아주기">아이와 놀아주기</option>
           </select>
         </div>
       </div>
+    </div>
 
-      <!-- 날짜 및 시간 선택 -->
-      <div class="date-wrapper">
-        <!-- 제목 -->
-        <h1>날짜 및 시간 선택하기</h1>
-        <div>
-          <!-- 날짜 선택 -->
-          <div class="date-select">
-            <!-- 날짜 선택 네비바 -->
-            <nav>
-              <!-- 연 선택 -->
-              <!-- 연이 출력되는 공간 -->
-              <div class="year-select"></div>
-              <ul class="year">년
-                <i class="fa-solid fa-angle-down drop-down"></i>
-                <li>2024</li>
-                <li>2023</li>
-                <li>2022</li>
-              </ul>
-
-              <!-- 월 선택 -->
-              <!-- 월이 출력되는 공간 -->
-              <div class="month-select"></div>
-              <ul class="month">월
-                <i class="fa-solid fa-angle-down drop-down"></i>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
-                <li>6</li>
-                <li>7</li>
-                <li>8</li>
-                <li>9</li>
-                <li>10</li>
-                <li>11</li>
-                <li>12</li>
-              </ul>
-
-              <!-- 일 선택 -->
-              <!-- 일이 출력되는 공간 -->
-              <div class="day-select"></div>
-              <ul class="day">일
-                <i class="fa-solid fa-angle-down drop-down"></i>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
-                <li>6</li>
-                <li>7</li>
-                <li>8</li>
-                <li>9</li>
-                <li>10</li>
-                <li>11</li>
-                <li>12</li>
-                <li>13</li>
-                <li>14</li>
-                <li>15</li>
-                <li>16</li>
-                <li>17</li>
-                <li>18</li>
-                <li>19</li>
-                <li>20</li>
-                <li>21</li>
-                <li>22</li>
-                <li>23</li>
-                <li>24</li>
-                <li>25</li>
-                <li>26</li>
-                <li>27</li>
-                <li>28</li>
-                <li>29</li>
-                <li>30</li>
-                <li>31</li>
-              </ul>
-            </nav>
-
-            <nav>
-              <!-- 시간 선택 -->
-              <!-- 시간 출력공간 -->
-              <div class="hour-select"></div>
-              <ul class="hour">시
-                <i class="fa-solid fa-angle-down drop-down"></i>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
-                <li>6</li>
-                <li>7</li>
-                <li>8</li>
-                <li>9</li>
-                <li>10</li>
-                <li>11</li>
-                <li>12</li>
-                <li>13</li>
-                <li>14</li>
-                <li>15</li>
-                <li>16</li>
-                <li>17</li>
-                <li>18</li>
-                <li>19</li>
-                <li>20</li>
-                <li>21</li>
-                <li>22</li>
-                <li>23</li>
-                <li>24</li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </div>
-
-      <!-- 썸머노트 -->
-      <div class="summer-note">
-        <h1>썸머노트 공간 (추후에 추가되는 영역)</h1>
-        <img src="../../../static/image/summer_note.png" alt="썸머 노트" />
-      </div>
-
-      <!-- 결제금액 영역 -->
-      <div class="payment-wrap">
-        <label for="payment-amount">결제 금액</label>
-        <input id="payment-amount" type="text" />원
-      </div>
-
-      <!-- 수업 등록 버튼 -->
-      <div class="register-button-wrap">
-        <a href="#">
-          <button class="submit-btn" type="submit">수업 등록하기</button>
-        </a>
-      </div>
-
-    </form>
-  </div>
-
-  <!-- 푸터 -->
-  <footer id="footer">
-    <div class="footer_wrap">
-      <img src="../../../static/image/footer_logo.png" alt="IDOLL봄">
-
+    <!-- 날짜 및 시간 선택 -->
+    <div class="date-wrapper">
+      <!-- 제목 -->
+      <h1>날짜 및 시간 선택하기</h1>
       <div>
-        <div>
-          <p>사업자등록번호 779-81-00425</p>
-          <p>통신판매업신고 2021-서울강남04707</p>
-        </div>
-        <address><b>본사</b> : 서울특별시 강남구 테헤란로 152 강남파이낸스센터빌딩 40층 자란다</address>
-        <div>
-          <p>(주)자란다 대표 김성환</p>
-          <p>개인정보보호책임자 김택주</p>
-        </div>
-      </div>
+        <!-- 날짜 선택 -->
+        <div class="date-select">
+          <!-- 날짜 선택 네비바 -->
+          <nav>
+            <!-- 연 선택 -->
+            <!-- 연이 출력되는 공간 -->
+            <div class="year-select"></div>
+            <ul class="year">년
+              <i class="fa-solid fa-angle-down drop-down"></i>
+              <li>2024</li>
+              <li>2023</li>
+              <li>2022</li>
+            </ul>
 
-      <div>
-        <ul>
-          <li><a href="#">이용약관</a></li>
-          <li><a href="#">개인정보처리방침</a></li>
-          <li><a href="#">고객지원</a></li>
-          <li><a href="#">운영관리방침</a></li>
-          <li><a href="#">이메일주소</a></li>
-        </ul>
-        <ul>
-          <li>
-            <a href="https://blog.naver.com/jaranblog" target="_blank">
-              <img src="../../../static/image/footer_social_blog.png"alt="블로그 바로가기">
-            </a>
-          </li>
-          <li>
-            <a href="https://www.instagram.com/jaranda__official" target="_blank">
-              <img src="../../../static/image/footer_social_insta.png" alt="인스타그램 바로가기">
-            </a>
-          </li>
-          <li>
-            <a href="https://www.youtube.com/channel/UCTXkxn1OlVvljxEe-hbd3Vg" target="_blank">
-              <img src="../../../static/image/footer_social_youtube.png" alt="유튜브 바로가기">
-            </a>
-          </li>
-        </ul>
+            <!-- 월 선택 -->
+            <!-- 월이 출력되는 공간 -->
+            <div class="month-select"></div>
+            <ul class="month">월
+              <i class="fa-solid fa-angle-down drop-down"></i>
+              <li>1</li>
+              <li>2</li>
+              <li>3</li>
+              <li>4</li>
+              <li>5</li>
+              <li>6</li>
+              <li>7</li>
+              <li>8</li>
+              <li>9</li>
+              <li>10</li>
+              <li>11</li>
+              <li>12</li>
+            </ul>
+
+            <!-- 일 선택 -->
+            <!-- 일이 출력되는 공간 -->
+            <div class="day-select"></div>
+            <ul class="day">일
+              <i class="fa-solid fa-angle-down drop-down"></i>
+              <li>1</li>
+              <li>2</li>
+              <li>3</li>
+              <li>4</li>
+              <li>5</li>
+              <li>6</li>
+              <li>7</li>
+              <li>8</li>
+              <li>9</li>
+              <li>10</li>
+              <li>11</li>
+              <li>12</li>
+              <li>13</li>
+              <li>14</li>
+              <li>15</li>
+              <li>16</li>
+              <li>17</li>
+              <li>18</li>
+              <li>19</li>
+              <li>20</li>
+              <li>21</li>
+              <li>22</li>
+              <li>23</li>
+              <li>24</li>
+              <li>25</li>
+              <li>26</li>
+              <li>27</li>
+              <li>28</li>
+              <li>29</li>
+              <li>30</li>
+              <li>31</li>
+            </ul>
+          </nav>
+
+          <nav>
+            <!-- 시간 선택 -->
+            <!-- 시간 출력공간 -->
+            <div class="hour-select"></div>
+            <ul class="hour">시
+              <i class="fa-solid fa-angle-down drop-down"></i>
+              <li>1</li>
+              <li>2</li>
+              <li>3</li>
+              <li>4</li>
+              <li>5</li>
+              <li>6</li>
+              <li>7</li>
+              <li>8</li>
+              <li>9</li>
+              <li>10</li>
+              <li>11</li>
+              <li>12</li>
+              <li>13</li>
+              <li>14</li>
+              <li>15</li>
+              <li>16</li>
+              <li>17</li>
+              <li>18</li>
+              <li>19</li>
+              <li>20</li>
+              <li>21</li>
+              <li>22</li>
+              <li>23</li>
+              <li>24</li>
+            </ul>
+          </nav>
+        </div>
       </div>
     </div>
-  </footer>
 
-  <script src="https://kit.fontawesome.com/96adc9c597.js" crossorigin="anonymous"></script>
-  <script src="http://code.jquery.com/jquery-1.9.0rc1.js"></script>
-  <script src="../../../static/js/registerForm.js"></script>
+    <!-- 썸머노트 -->
+    <div class="summer-note">
+      <h1>썸머노트 공간 (추후에 추가되는 영역)</h1>
+      <img src="../../../static/image/summer_note.png" alt="썸머 노트" />
+    </div>
+
+    <!-- 결제금액 영역 -->
+      <div class="payment-wrap">
+        <label for="classPaymentAccount">결제 금액</label>
+        <input id="classPaymentAccount" type="text" name="classPaymentAccount" required />원
+      </div>
+
+    <!-- 수업 등록 버튼 -->
+    <div class="register-button-wrap">
+      <a href="#">
+        <button class="submit-btn" type="submit">수업 등록하기</button>
+      </a>
+    </div>
+
+  </form>
+</div>
+
+<!-- 푸터 -->
+<div th:replace="~{/layout/footer :: #footer}"></div>
+
+<script src="https://kit.fontawesome.com/96adc9c597.js" crossorigin="anonymous"></script>
+<script src="http://code.jquery.com/jquery-1.9.0rc1.js"></script>
+<script src="../../../static/js/registerForm.js"></script>
+
 </body>
 
 </html>

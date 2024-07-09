@@ -1,5 +1,6 @@
 package com.example.idollbom.domain.vo;
 
+import com.example.idollbom.domain.dto.prodto.ClassDTO;
 import lombok.*;
 
 @ToString
@@ -15,4 +16,19 @@ public class classVO {
     private String classContent;
     private Long classPaymentAccount;
     private Long proNumber;
+
+    public static classVO toEntity(ClassDTO classDTO){
+
+
+        return classVO.builder()
+                .classNumber(classDTO.getClassNumber())
+                .className(classDTO.getClassName())
+                .classCategoryBig(classDTO.getClassCategoryBig())
+                .classCategorySmall(classDTO.getClassCategorySmall())
+                .classContent(classDTO.getClassContent())
+                .classPaymentAccount(classDTO.getClassPaymentAccount())
+                .proNumber(classDTO.getProNumber())
+                .build();
+
+    }
 }

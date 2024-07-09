@@ -1,231 +1,106 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="../../../static/css/pro/childfind.css">
-    <link rel="stylesheet" href="../../../static/css/layout/header.css">
-    <link rel="stylesheet" href="../../../static/css/layout/footer.css">
+    <link rel="stylesheet" th:href="@{/css/pro/childfind.css}">
+    <link rel="stylesheet" th:href="@{/css/layout/header.css}">
+    <link rel="stylesheet" th:href="@{/css/layout/footer.css}">
     <!-- 모달창 css -->
-    <link rel="stylesheet" href="../../../static/css/modal/modalstyle.css" />
-    <link rel="stylesheet" href="../../../static/css/modal/letter.css" />
+    <link rel="stylesheet" th:href="@{/css/modal/modalstyle.css}">
+    <link rel="stylesheet" th:href="@{/css/modal/letter.css}">
 
     <title>아이찾기 페이지</title>
 </head>
 
 <body>
-    <!-- 헤더 부분 -->
-    <header id="header">
-        <div class="header_wrap">
-            <h1><a href="../html/main/index_pro.html"><img src="../../../static/image/logo.png" alt="IDOLL봄"></a></h1>
+<!-- 헤더 -->
+<div th:replace="~{/layout/header_pro :: #header}"></div>
 
-            <nav>
-                <ul class="gnb">
-                    <li>
-                        <a href="#">수업등록</a>
-                    </li>
-                    <li>
-                        <a href="#">아이찾기</a>
-                    </li>
-                    <li>
-                        <a href="#">신청하기</a>
-                    </li>
-                    <li>
-                        <a href="#">공지사항</a>
-                    </li>
-                </ul>
-            </nav>
-            <div class="side">
-                <p><button><img src="../../../static/image/Alarm.png" alt="알림"></button></p>
-                <p><a href="#">마이페이지</a></p>
-                <p><a href="#">로그인 /</a></p>
-                <p><a href="#">회원가입</a></p>
-            </div>
-        </div>
-    </header>
-
-    <!-- 아이찾기 화면 -->
-    <div id="container">
-        <div class="findchild-container">
-            <p class="findchild-text">아이 찾기</p>
-        </div>
-
-        <!-- 아이찾기 메인 -->
-        <table>
-            <thead>
-                <tr>
-                    <th>수업명</th>
-                    <th>부모 이름</th>
-                    <th>아이 이름</th>
-                    <th>아이 나이</th>
-                    <th>아이 성별</th>
-                    <th>아이 특이사항</th>
-                    <th>쪽지</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>놀이터</td>
-                    <td>이지은</td>
-                    <td>김지수</td>
-                    <td>3세</td>
-                    <td>여</td>
-                    <td>주의 산만</td>
-                    <td><button class="btn-open-modal"><img src="../../../static/image/Alarm.png" alt="쪽지"></button></td>
-                </tr>
-                <tr>
-                    <td>놀이</td>
-                    <td>이지은</td>
-                    <td>김지수</td>
-                    <td>3세</td>
-                    <td>여</td>
-                    <td>주의 산만</td>
-                    <td><button><img src="../../../static/image/Alarm.png" alt="쪽지"></button></td>
-                </tr>
-                <tr>
-                    <td>놀이터</td>
-                    <td>이지은</td>
-                    <td>김지수</td>
-                    <td>3세</td>
-                    <td>여</td>
-                    <td>주의 산만</td>
-                    <td><button><img src="../../../static/image/Alarm.png" alt="쪽지"></button></td>
-                </tr>
-                <tr>
-                    <td>놀이터</td>
-                    <td>이지은</td>
-                    <td>김지수</td>
-                    <td>3세</td>
-                    <td>여</td>
-                    <td>주의 산만</td>
-                    <td><button><img src="../../../static/image/Alarm.png" alt="쪽지"></button></td>
-                </tr>
-                <tr>
-                    <td>놀이터</td>
-                    <td>이지은</td>
-                    <td>김지수</td>
-                    <td>3세</td>
-                    <td>여</td>
-                    <td>주의 산만</td>
-                    <td><button><img src="../../../static/image/Alarm.png" alt="쪽지"></button></td>
-                </tr>
-                <tr>
-                    <td>놀이터</td>
-                    <td>이지은</td>
-                    <td>김지수</td>
-                    <td>3세</td>
-                    <td>여</td>
-                    <td>주의 산만</td>
-                    <td><button><img src="../../../static/image/Alarm.png" alt="쪽지"></button></td>
-                </tr>
-                <tr>
-                    <td>놀이터</td>
-                    <td>이지은</td>
-                    <td>김지수</td>
-                    <td>3세</td>
-                    <td>여</td>
-                    <td>주의 산만</td>
-                    <td><button><img src="../../../static/image/Alarm.png" alt="쪽지"></button></td>
-                </tr>
-                <tr>
-                    <td>놀이터</td>
-                    <td>이지은</td>
-                    <td>김지수</td>
-                    <td>3세</td>
-                    <td>여</td>
-                    <td>주의 산만</td>
-                    <td><button><img src="../../../static/image/Alarm.png" alt="쪽지"></button></td>
-                </tr>
-                <tr>
-                    <td>놀이터</td>
-                    <td>이지은</td>
-                    <td>김지수</td>
-                    <td>3세</td>
-                    <td>여</td>
-                    <td>주의 산만</td>
-                    <td><button class="btn-open-modal"><img src="../../../static/image/Alarm.png" alt="쪽지"></button></td>
-                </tr>
-            </tbody>
-        </table>
-        <!-- 페이지 메뉴바  -->
-        <div class="pagination">
-            <!-- &laquo는 이전페이지 이동 -->
-            <a href="#">&laquo;</a>
-            <a class="active" href="#">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <!-- &raquo는 다음페이지로 이동 -->
-            <a href="#">&raquo;</a>
-        </div>
-        <!-- 쪽지보내기 모달창 -->
-        <form action="#" method="get">
-            <div class="modal">
-                <div class="modal-body profile-body">
-                    <div class="header">
-                        <img class="img" src="../images/logo.png" alt="로고">
-                        <h3 id="title">쪽지 보내기</h3>
-                        <button id="close-btn"><img class="x-btn" src="../images/closebtn.png" alt="닫기버튼"></button>
-                    </div>
-                    <div class="mb-3">
-                        <label for="parent" class="form-label">부모님</label>
-                        <input type="parent" class="form-control" readonly>
-                    </div>
-                    <div class="mb-3">
-                        <label for="textarea" class="form-label">내용</label>
-                        <textarea id="textarea" class="form-control" placeholder="수업 후기를 작성해주세요." rows="6"
-                            maxlength="500"></textarea>
-                    </div>
-
-                    <div class="modal-btn">
-                        <!-- 추가하기를 누르면 새로운 페이지로 이동 -->
-                        <button class="close-btn btn">취소하기</button>
-                        <button class="add-btn btn" type="submit">보내기</button>
-                    </div>
-                </div>
-            </div>
-        </form>
+<!-- 아이찾기 화면 -->
+<div id="container">
+    <div class="findchild-container">
+        <p class="findchild-text">아이 찾기</p>
     </div>
 
-    <!-- footer -->
-    <footer id="footer">
-        <div class="footer_wrap">
-            <img src="../../../static/image/footer_logo.png" alt="IDOLL봄">
+    <!-- 아이찾기 메인 -->
+    <table>
+        <thead>
+        <tr>
+            <th>수업명</th>
+            <th>부모 이름</th>
+            <th>아이 이름</th>
+            <th>아이 나이</th>
+            <th>아이 성별</th>
+            <th>아이 특이사항</th>
+            <th>쪽지</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr th:each="classList : ${classLists}">
+                <td th:text="${class.className}">놀이터</td>
+                <td>이지은</td>
+                <td>김지수</td>
+                <td>3세</td>
+                <td>여</td>
+                <td>주의 산만</td>
+                <td><button class="btn-open-modal"><img src="../images/Alarm.png" alt="쪽지"></button></td>
+            </tr>
+            <tr>
+                <td>놀이터</td>
+                <td>이지은</td>
+                <td>김지수</td>
+                <td>3세</td>
+                <td>여</td>
+                <td>주의 산만</td>
+                <td><button class="btn-open-modal"><img src="../images/Alarm.png" alt="쪽지"></button></td>
+            </tr>
 
-            <div>
-                <div>
-                    <p>사업자등록번호 779-81-00425</p>
-                    <p>통신판매업신고 2021-서울강남04707</p>
+        </tbody>
+    </table>
+    <!-- 페이지 메뉴바  -->
+    <div class="pagination">
+        <!-- &laquo는 이전페이지 이동 -->
+        <a href="#">&laquo;</a>
+        <a class="active" href="#">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <!-- &raquo는 다음페이지로 이동 -->
+        <a href="#">&raquo;</a>
+    </div>
+    <!-- 쪽지보내기 모달창 -->
+    <form action="#" method="get">
+        <div class="modal">
+            <div class="modal-body profile-body">
+                <div class="header">
+                    <img class="img" src="../images/logo.png" alt="로고">
+                    <h3 id="title">쪽지 보내기</h3>
+                    <button id="close-btn"><img class="x-btn" src="../images/closebtn.png" alt="닫기버튼"></button>
                 </div>
-                <address><b>본사</b> : 서울특별시 강남구 테헤란로 152 강남파이낸스센터빌딩 40층 자란다</address>
-                <div>
-                    <p>(주)자란다 대표 김성환</p>
-                    <p>개인정보보호책임자 김택주</p>
+                <div class="mb-3">
+                    <label for="parent" class="form-label">부모님</label>
+                    <input type="parent" class="form-control" readonly>
                 </div>
-            </div>
+                <div class="mb-3">
+                    <label for="textarea" class="form-label">내용</label>
+                    <textarea id="textarea" class="form-control" placeholder="수업 후기를 작성해주세요." rows="6"
+                              maxlength="500"></textarea>
+                </div>
 
-            <div>
-                <ul>
-                    <li><a href="#">이용약관</a></li>
-                    <li><a href="#">개인정보처리방침</a></li>
-                    <li><a href="#">고객지원</a></li>
-                    <li><a href="#">운영관리방침</a></li>
-                    <li><a href="#">이메일주소</a></li>
-                </ul>
-                <ul>
-                    <li><a href="https://blog.naver.com/jaranblog" target="_blank"><img
-                                src="../../../static/image/footer_social_blog.png" alt="블로그 바로가기"></a></li>
-                    <li><a href="https://www.instagram.com/jaranda__official" target="_blank"><img
-                                src="../../../static/image/footer_social_insta.png" alt="인스타그램 바로가기"></a></li>
-                    <li><a href="https://www.youtube.com/channel/UCTXkxn1OlVvljxEe-hbd3Vg" target="_blank"><img
-                                src="../../../static/image/footer_social_youtube.png" alt="유튜브 바로가기"></a></li>
-                </ul>
+                <div class="modal-btn">
+                    <!-- 추가하기를 누르면 새로운 페이지로 이동 -->
+                    <button class="close-btn btn">취소하기</button>
+                    <button class="add-btn btn" type="submit">보내기</button>
+                </div>
             </div>
         </div>
-    </footer>
-</body>
+    </form>
+</div>
+
+<!-- 푸터 -->
+<div th:replace="~{/layout/footer :: #footer}"></div>
 <script src="http://code.jquery.com/jquery-1.9.0rc1.js"></script>
-<script src="../../../static/js/modal.js"></script>
+<script th:src="@{/js/modal.js}"></script>
+</body>
 
 </html>

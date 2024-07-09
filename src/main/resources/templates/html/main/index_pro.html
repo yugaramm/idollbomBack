@@ -1,174 +1,112 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="../../../static/css/main/index_pro.css">
-    <link rel="stylesheet" href="../../../static/css/layout/header.css">
-    <link rel="stylesheet" href="../../../static/css/layout/footer.css">
+    <link rel="stylesheet" th:href="@{/css/main/index_pro.css}">
+    <link rel="stylesheet" th:href="@{/css/layout/header.css}">
+    <link rel="stylesheet" th:href="@{/css/layout/footer.css}">
     <title>IDOLL봄</title>
 </head>
 
 <body>
-    <!-- 헤더 -->
-    <header id="header">
-        <div class="header_wrap">
-            <h1><a href="../main/index_parents.html"><img src="../../images/logo.png" alt="IDOLL봄"></a></h1>
+<!-- 헤더 -->
+<div th:replace="~{/layout/header_pro :: #header}"></div>
 
-            <nav>
-                <ul class="gnb">
-                    <li>
-                        <a href="../../html/registerForm.html">수업등록</a>
-                    </li>
-                    <li>
-                        <a href="../../html/childfind.html">아이찾기</a>
-                    </li>
-                    <li>
-                        <a href="../../html/community_pro.html">자유 게시판</a>
-                    </li>
-                    <li>
-                        <a href="../../html/notice.html">공지사항</a>
-                    </li>
-                </ul>
-            </nav>
-            <div class="side">
-                <p><button onclick="window.location='../mypage/mypage_mail.html'"><img src="../../images/Alarm.png"
-                            alt="알림"></button></p>
-                <p><a href="../../html/propage/propage_fixprofile.html">마이페이지</a></p>
-                <p><a href="../../html/login/loginpage.html">로그인 /</a></p>
-                <p><a href="../../html/login/registerpage.html">회원가입</a></p>
+<div id="container">
+    <!-- 전문가 메인 페이지 비쥬얼 이미지 -->
+    <section class="visual">
+        <div>
+            <img src="../../images/index_pro_visual.jpg">
+        </div>
+    </section>
+
+    <!-- 아이찾기 자세히 보기 클릭 시 나를 찜한 부모 리스트를 보여주는 페이지로 이동 -->
+    <section class="kids_find">
+        <h2>아이찾기</h2>
+        <div class="kids_find_wrap">
+            <img src="../../images/index_pro_find.jpg">
+            <div>
+                <p>학습부터 놀이, 돌봄까지<br>
+                    내게 딱 맞는 수업 찾기</p>
+
+                <a th:href="@{/pro/childfind}">자세히 보기<span>+</span></a>
             </div>
         </div>
-    </header>
+    </section>
 
-    <div id="container">
-        <!-- 전문가 메인 페이지 비쥬얼 이미지 -->
-        <section class="visual">
+    <!-- 수업등록 바로가기 클릭 시 수업등록 페이지로 이동 -->
+    <section class="registration">
+        <h2>수업등록</h2>
+        <div class="registration_wrap">
+            <img src="../../images/index_pro_registration.jpg">
             <div>
-                <img src="../../images/index_pro_visual.jpg">
-            </div>
-        </section>
+                <p>아이들을 좋아하는 누구나<br>
+                    자란다 선생님이 될 수 있어요!</p>
 
-        <!-- 아이찾기 자세히 보기 클릭 시 나를 찜한 부모 리스트를 보여주는 페이지로 이동 -->
-        <section class="kids_find">
-            <h2>아이찾기</h2>
-            <div class="kids_find_wrap">
-                <img src="../../images/index_pro_find.jpg">
-                <div>
-                    <p>학습부터 놀이, 돌봄까지<br>
-                        내게 딱 맞는 수업 찾기</p>
-
-                    <a href="../childfind.html">자세히 보기<span>+</span></a>
-                </div>
-            </div>
-        </section>
-
-        <!-- 수업등록 바로가기 클릭 시 수업등록 페이지로 이동 -->
-        <section class="registration">
-            <h2>수업등록</h2>
-            <div class="registration_wrap">
-                <img src="../../images/index_pro_registration.jpg">
-                <div>
-                    <p>아이들을 좋아하는 누구나<br>
-                        자란다 선생님이 될 수 있어요!</p>
-
-                    <a href="../registerForm.html">바로가기<span>+</span></a>
-                </div>
-            </div>
-        </section>
-
-        <!-- 활동 가이드 더 알아보기 클릭 시 가이드 페이지로 이동 -->
-        <section class="pro_guide">
-            <h2>활동 가이드</h2>
-            <div class="pro_guide_wrap">
-                <p>보람과 보상을 함께<br>IDOLL봄 전문가 되기 </p>
-                <ul>
-                    <li>
-                        <a href="#">
-                            <p>아이가 보고싶었다고 말해주거나,<br> 부모님께서 편지를 써주신 적이 있는데<br> IDOLL봄 전문가로서 너무 뿌듯했습니다.</p>
-                            <p>- IDOLL봄 유O람 전문가</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <p>아이가 보고싶었다고 말해주거나,<br> 부모님께서 편지를 써주신 적이 있는데<br> IDOLL봄 전문가로서 너무 뿌듯했습니다.</p>
-                            <p>- IDOLL봄 유O람 전문가</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <p>아이가 보고싶었다고 말해주거나,<br> 부모님께서 편지를 써주신 적이 있는데<br> IDOLL봄 전문가로서 너무 뿌듯했습니다.</p>
-                            <p>- IDOLL봄 유O람 전문가</p>
-                        </a>
-                    </li>
-                </ul>
-                <p><a href="#">IDOLL봄 전문가 더 알아보기</a></p>
-                <div class="pro_guide_control">
-                    <button><img src="../../images/pro_button_pre.png" alt="이전 메뉴 보기"></button>
-                    <button><img src="../../images/pro_button_next.png" alt="다음 메뉴 보기"></button>
-                </div>
-
-            </div>
-        </section>
-
-        <section class="promotion">
-            <h2>전공과 취미 살려<br>IDOLL봄 전문가로 활동해보세요</h2>
-            <div>
-                <div>
-                    <p>아이 찾기</p>
-                    <p>학습부터 놀이, 돌봄까지<br>내게 딱 맞는 아이 찾기</p>
-                    <p>영어, 한글 등 학습부터 등하원 보조 같은 돌봄까지,<br> 내게 딱 맞는 수업 요청을 발견하고 수업을
-                        시작해보세요.</p>
-                </div>
-                <img src="../../images/find_class.png">
-            </div>
-            <div>
-                <img src="../../images/pro_salary.png">
-                <div>
-                    <p>활동비</p>
-                    <p>경력과 활동에 따라<br>상승하는 활동비</p>
-                    <p>활동비를 직접 결정하는 자율 시급제!<br> 내 실력 인정받으며 편하게 정산받으세요.</p>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- 푸터 -->
-    <footer id="footer">
-        <div class="footer_wrap">
-            <img src="../../images/footer_logo.png" alt="IDOLL봄">
-
-            <div>
-                <div>
-                    <p>사업자등록번호 779-81-00425</p>
-                    <p>통신판매업신고 2021-서울강남04707</p>
-                </div>
-                <address><b>본사</b> : 서울특별시 강남구 테헤란로 152 강남파이낸스센터빌딩 40층 자란다</address>
-                <div>
-                    <p>(주)자란다 대표 김성환</p>
-                    <p>개인정보보호책임자 김택주</p>
-                </div>
-            </div>
-
-            <div>
-                <ul>
-                    <li><a href="#">이용약관</a></li>
-                    <li><a href="#">개인정보처리방침</a></li>
-                    <li><a href="#">고객지원</a></li>
-                    <li><a href="#">운영관리방침</a></li>
-                    <li><a href="#">이메일주소</a></li>
-                </ul>
-                <ul>
-                    <li><a href="https://blog.naver.com/jaranblog" target="_blank"><img
-                                src="../../images/footer_social_blog.png" alt="블로그 바로가기"></a></li>
-                    <li><a href="https://www.instagram.com/jaranda__official" target="_blank"><img
-                                src="../../images/footer_social_insta.png" alt="인스타그램 바로가기"></a></li>
-                    <li><a href="https://www.youtube.com/channel/UCTXkxn1OlVvljxEe-hbd3Vg" target="_blank"><img
-                                src="../../images/footer_social_youtube.png" alt="유튜브 바로가기"></a></li>
-                </ul>
+                <a th:href="@{/pro/registerForm}">바로가기<span>+</span></a>
             </div>
         </div>
-    </footer>
+    </section>
+
+    <!-- 활동 가이드 더 알아보기 클릭 시 가이드 페이지로 이동 -->
+    <section class="pro_guide">
+        <h2>활동 가이드</h2>
+        <div class="pro_guide_wrap">
+            <p>보람과 보상을 함께<br>IDOLL봄 전문가 되기 </p>
+            <ul>
+                <li>
+                    <a href="#">
+                        <p>아이가 보고싶었다고 말해주거나,<br> 부모님께서 편지를 써주신 적이 있는데<br> IDOLL봄 전문가로서 너무 뿌듯했습니다.</p>
+                        <p>- IDOLL봄 유O람 전문가</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <p>아이가 보고싶었다고 말해주거나,<br> 부모님께서 편지를 써주신 적이 있는데<br> IDOLL봄 전문가로서 너무 뿌듯했습니다.</p>
+                        <p>- IDOLL봄 유O람 전문가</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <p>아이가 보고싶었다고 말해주거나,<br> 부모님께서 편지를 써주신 적이 있는데<br> IDOLL봄 전문가로서 너무 뿌듯했습니다.</p>
+                        <p>- IDOLL봄 유O람 전문가</p>
+                    </a>
+                </li>
+            </ul>
+            <p><a href="#">IDOLL봄 전문가 더 알아보기</a></p>
+            <div class="pro_guide_control">
+                <button><img src="../../images/pro_button_pre.png" alt="이전 메뉴 보기"></button>
+                <button><img src="../../images/pro_button_next.png" alt="다음 메뉴 보기"></button>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="promotion">
+        <h2>전공과 취미 살려<br>IDOLL봄 전문가로 활동해보세요</h2>
+        <div>
+            <div>
+                <p>아이 찾기</p>
+                <p>학습부터 놀이, 돌봄까지<br>내게 딱 맞는 아이 찾기</p>
+                <p>영어, 한글 등 학습부터 등하원 보조 같은 돌봄까지,<br> 내게 딱 맞는 수업 요청을 발견하고 수업을
+                    시작해보세요.</p>
+            </div>
+            <img src="../../images/find_class.png">
+        </div>
+        <div>
+            <img src="../../images/pro_salary.png">
+            <div>
+                <p>활동비</p>
+                <p>경력과 활동에 따라<br>상승하는 활동비</p>
+                <p>활동비를 직접 결정하는 자율 시급제!<br> 내 실력 인정받으며 편하게 정산받으세요.</p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- 푸터 -->
+<div th:replace="~{/layout/footer :: #footer}"></div>
 </body>
 <script src="http://code.jquery.com/jquery-1.9.0rc1.js"></script>
 
