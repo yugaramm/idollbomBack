@@ -23,27 +23,31 @@
             </div>
 
             <!-- 뭐가 눌려졌는지에 따라 데이터가 뿌려지는 게 다르다 -->
-            <ul>
-                <li><button class="category-doll" onclick="categoryClick1()" value="등/하원" th:href="@{class/classes}">등/하원</button></li>
-                <li><button class="category-play" onclick="categoryClick2()" value="실내놀이" th:href="@{class/classes/play}">실내놀이</button></li>
-                <li><button class="category-book" onclick="categoryClick3()" value="책읽기">책읽기</button></li>
-                <li><button class="category-playground" onclick="categoryClick4()" value="놀이터">놀이터</button></li>
-                <li><button class="category-experience" onclick="categoryClick5()" value="견학/체험">견학/체험</button></li>
+            <ul class="category">
+                <li><a id="one" th:href="@{/class/classcare(category='등/하원')}">등/하원</a></li>
+                <li><a id="two" th:href="@{/class/classcare(category='실내놀이')}">실내놀이</a></li>
+                <li><a id="three" th:href="@{/class/classcare(category='책읽기')}">책읽기</a></li>
+                <li><a id="four" th:href="@{/class/classcare(category='놀이터')}">놀이터</a></li>
+                <li><a id="five" th:href="@{/class/classcare(category='견학/체험')}">견학/체험</a></li>
             </ul>
 
             <div class="class_list_search">
                 <p>전체 <span th:text="${count}"></span>건의 게시글이 있습니다.</p>
 
+                <!-- 전체를 검색하면 전체가 나오게
+                     제목을 누른다면 제목을 기준으로 검색
+                     내용을 누른다면 내용을 기준으로 검색-->
                 <div>
-                    <select>
-                        <option>전체</option>
-                        <option>제목</option>
-                        <option>내용</option>
+                    <select name="searchType">
+                        <option value="all">전체</option>
+                        <option value="title">제목</option>
+                        <option value="content">내용</option>
                     </select>
 
-                    <form>
-                        <input type="text" placeholder="검색어를 입력해주세요">
-                        <input type="image" th:src="@{/images/comu_search.png}" alt="검색하기">
+                    <!-- 검색을 누르면 해당 리스트들 가져오기 -->
+                    <form id="searchForm" th:action="@{/class/search}" method="get">
+                        <input type="text" name="searchWord" placeholder="검색어를 입력해주세요" th:value="${searchWord}">
+                        <input type="image" th:src="@{/images/comu_search.png}" alt="검색하기" onclick="submitForm()">
                     </form>
                 </div>
             </div>
@@ -58,17 +62,18 @@
                 <tbody>
                     <!-- 실제로는 반복돌릴 리스트 보기 편하게 다 붙여놓음 -->
                     <tr th:each="classList : ${classLists}" th:object="${classList}">
-                        <td><img th:src="@{/images/class_list_pro.png}"></td>
+                        <input type="hidden" th:value="*{proNumber}">
+                        <td><img th:src="*{proProfileImageUrl}"></td>
                         <td>
                             <div>
-                                <p th:text="*{proName}">유가람</p>
+                                <p th:text="*{proName}"></p>
                                 <!--리뷰 점수와 갯수만 보여주자-->
-                                <p>(87)</p>
+                                <p th:text="'('+ *{reviewCount} +')'"></p>
                             </div>
-                            <p th:text="*{className}">모든아이의 교육을 책임집니다!</p>
-                            <p th:text="*{classContent}">제가 맡은 모든 아이들의 성적이 향상 되었습니다 만족하지 못할 시 환불해드립니다</p>
-                            <p th:text="*{proAddress}">강남구 개포동</p>
-                            <p>2024.07.01</p>
+                            <p th:text="*{className}"></p>
+                            <p th:text="*{classContent}"></p>
+                            <p th:text="*{proAddress}"></p>
+                            <p th:text="*{classRegisterDate}"></p>
                         </td>
                         <td><button><img th:src="@{/images/class_list_pick_n.png}"></button>
                             <p><a href="../html/child/studyDetail.html">자세히 보기</a></p>
@@ -94,58 +99,51 @@
 <script src="http://code.jquery.com/jquery-1.9.0rc1.js"></script>
 <script th:src="@{/js/motion.js}"></script>
 <script>
-    const category1 = document.querySelector('.category-doll')
-    const category2 = document.querySelector('.category-play')
-    const category3 = document.querySelector('.category-book')
-    const category4 = document.querySelector('.category-playground')
-    const category5 = document.querySelector('.category-experience')
+    // 버튼 클릭 시 css 적용 바꾸기
+    // 부모요소에서 가져오는 class
+    // 페이지 로딩 후 실행될 함수
+    document.addEventListener("DOMContentLoaded", function() {
+        // 각 링크 요소에 클릭 이벤트 리스너 추가
+        document.getElementById("one").addEventListener("click", function() {
+            // 다른 링크들의 폰트 색상 초기화
+            resetFontColors();
+            // 클릭된 링크의 폰트 색상 변경
+            this.style.color = "#048D3B";
+            // 추가적으로 필요한 동작을 여기에 작성할 수 있습니다.
+        });
 
-    // 등/하원 클릭 시
-    function categoryClick1(){
-        category1.style.color='#048D3B'
-        category2.style.color='rgba(0, 0, 0, 0.4)'
-        category3.style.color='rgba(0, 0, 0, 0.4)'
-        category4.style.color='rgba(0, 0, 0, 0.4)'
-        category5.style.color='rgba(0, 0, 0, 0.4)'
+        document.getElementById("two").addEventListener("click", function() {
+            resetFontColors();
+            this.style.color = "#048D3B";
+        });
 
-    }
+        document.getElementById("three").addEventListener("click", function() {
+            resetFontColors();
+            this.style.color = "#048D3B";
+        });
 
-    // 실내놀이 클릭 시
-    function categoryClick2(){
-        category1.style.color='rgba(0, 0, 0, 0.4)'
-        category2.style.color='#048D3B'
-        category3.style.color='rgba(0, 0, 0, 0.4)'
-        category4.style.color='rgba(0, 0, 0, 0.4)'
-        category5.style.color='rgba(0, 0, 0, 0.4)'
+        document.getElementById("four").addEventListener("click", function() {
+            resetFontColors();
+            this.style.color = "#048D3B";
+        });
 
-    }
+        document.getElementById("five").addEventListener("click", function() {
+            resetFontColors();
+            this.style.color = "#048D3B";
+        });
 
-    // 책 읽기 클릭 시
-    function categoryClick3(){
-        category1.style.color='rgba(0, 0, 0, 0.4)'
-        category2.style.color='rgba(0, 0, 0, 0.4)'
-        category3.style.color='#048D3B'
-        category4.style.color='rgba(0, 0, 0, 0.4)'
-        category5.style.color='rgba(0, 0, 0, 0.4)'
+        // 폰트 색상을 초기화하는 함수
+        function resetFontColors() {
+            var links = document.querySelectorAll(".category a");
+            links.forEach(function(link) {
+                link.style.color = ""; // 기본 값으로 설정
+            });
+        }
+    });
 
-    }
-    // 놀이터 클릭 시
-    function categoryClick4(){
-        category1.style.color='rgba(0, 0, 0, 0.4)'
-        category2.style.color='rgba(0, 0, 0, 0.4)'
-        category3.style.color='rgba(0, 0, 0, 0.4)'
-        category4.style.color='#048D3B'
-        category5.style.color='rgba(0, 0, 0, 0.4)'
-
-    }
-    // 견학/체험 클릭 시
-    function categoryClick5(){
-        category1.style.color='rgba(0, 0, 0, 0.4)'
-        category2.style.color='rgba(0, 0, 0, 0.4)'
-        category3.style.color='rgba(0, 0, 0, 0.4)'
-        category4.style.color='rgba(0, 0, 0, 0.4)'
-        category5.style.color='#048D3B'
-
+    // 검색하기를 눌렀을 때 일어나는 이벤트
+    function submitForm() {
+        document.getElementById("searchForm").submit();
     }
 </script>
 </html>

@@ -1,171 +1,140 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="../../../static/css/apply/class_list.css">
+    <link rel="stylesheet" th:href="@{/css/apply/class_list.css}">
+    <link rel="stylesheet" th:href="@{/css/main/index_parents.css}">
+    <link rel="stylesheet" th:href="@{/css/layout/header.css}">
+    <link rel="stylesheet" th:href="@{/css/layout/footer.css}">
     <title>IDOLL봄</title>
 </head>
+
 <!-- 대카: 교육 -->
-
 <body>
-    <div id="container">
-        <div class="class_list">
-            <h2>신청하기</h2>
-            <p>우리아이 맞춤 수업을 찾을 수 있습니다</p>
+<div th:replace="~{/layout/header_parents :: header}"></div>
+<div id="container">
+    <div class="class_list">
+        <h2>신청하기</h2>
+        <p>우리아이 맞춤 수업을 찾을 수 있습니다</p>
+
+        <div>
+            <p>교육과 배움을 함께,<br> 우리아이 단짝쌤 찾기</p>
+        </div>
+
+        <!-- 뭐가 눌려졌는지에 따라 데이터가 뿌려지는 게 다르다 -->
+        <ul class="category">
+            <li><a id="one" th:href="@{/class/classsport(category='초등국어')}">초등국어</a></li>
+            <li><a id="two" th:href="@{/class/classsport(category='초등수학')}">초등수학</a></li>
+            <li><a id="three" th:href="@{/class/classsport(category='초등영어')}">초등영어</a></li>
+            <li><a id="four" th:href="@{/class/classsport(category='초등과학')}">초등과학</a></li>
+            <li><a id="five" th:href="@{/class/classsport(category='코딩')}">코딩</a></li>
+        </ul>
+        <div class="class_list_search">
+            <p>전체 <span th:text="${count}"></span>건의 게시글이 있습니다.</p>
 
             <div>
-                <p>돌봄과 배움을 함께,<br> 우리아이 단짝쌤 찾기</p>
-            </div>
+                <select>
+                    <option>전체</option>
+                    <option>제목</option>
+                    <option>내용</option>
+                </select>
 
-            <!-- 뭐가 눌려졌는지에 따라 데이터가 뿌려지는 게 다르다 -->
-            <ul>
-                <li><button>등/하원</button></li>
-                <li><button>실내놀이</button></li>
-                <li><button>책읽기</button></li>
-                <li><button>놀이터</button></li>
-                <li><button>견학/체험</button></li>
-            </ul>
-
-            <div class="class_list_search">
-                <p>전체 <span>34</span>건의 게시글이 있습니다.</p>
-
-                <div>
-                    <select>
-                        <option>전체</option>
-                        <option>제목</option>
-                        <option>내용</option>
-                    </select>
-
-                    <form>
-                        <input type="text" placeholder="검색어를 입력해주세요">
-                        <input type="image" src="../../../static/image/comu_search.png" alt="검색하기">
-                    </form>
-                </div>
-            </div>
-
-            <!-- 테이블 위 바 -->
-            <div>
-                <p>강사 프로필</p>
-                <p>내용</p>
-            </div>
-
-            <table>
-                <tbody>
-                    <!-- 실제로는 반복돌릴 리스트 보기 편하게 다 붙여놓음 -->
-                    <tr>
-                        <td><img src="../../../static/image/class_list_pro.png"></td>
-                        <td>
-                            <div>
-                                <p>유가람</p><img src="../../../static/image/4.5rating.png">
-                                <p>(87)</p>
-                            </div>
-                            <p>모든아이의 교육을 책임집니다!</p>
-                            <p>제가 맡은 모든 아이들의 성적이 향상 되었습니다 만족하지 못할 시 환불해드립니다</p>
-                            <p>강남구 개포동</p>
-                            <p>2024.07.01</p>
-                        </td>
-                        <td><button><img src="../../../static/image/class_list_pick_y.png"></button>
-                            <p><a href="../html/child/studyDetail.html">자세히 보기</a></p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><img src="../../../static/image/class_list_pro.png"></td>
-                        <td>
-                            <div>
-                                <p>유가람</p><img src="../../../static/image/4.5rating.png">
-                                <p>(87)</p>
-                            </div>
-                            <p>모든아이의 교육을 책임집니다!</p>
-                            <p>제가 맡은 모든 아이들의 성적이 향상 되었습니다 만족하지 못할 시 환불해드립니다</p>
-                            <p>강남구 개포동</p>
-                            <p>2024.07.01</p>
-                        </td>
-                        <td><button><img src="../../../static/image/class_list_pick_y.png"></button>
-                            <p><a href="../html/child/studyDetail.html">자세히 보기</a></p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><img src="../../../static/image/class_list_pro.png"></td>
-                        <td>
-                            <div>
-                                <p>유가람</p><img src="../../../static/image/4.5rating.png">
-                                <p>(87)</p>
-                            </div>
-                            <p>모든아이의 교육을 책임집니다!</p>
-                            <p>제가 맡은 모든 아이들의 성적이 향상 되었습니다 만족하지 못할 시 환불해드립니다</p>
-                            <p>강남구 개포동</p>
-                            <p>2024.07.01</p>
-                        </td>
-                        <td><button><img src="../../../static/image/class_list_pick_n.png"></button>
-                            <p><a href="../html/child/studyDetail.html">자세히 보기</a></p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><img src="../../../static/image/class_list_pro.png"></td>
-                        <td>
-                            <div>
-                                <p>유가람</p><img src="../../../static/image/4.5rating.png">
-                                <p>(87)</p>
-                            </div>
-                            <p>모든아이의 교육을 책임집니다!</p>
-                            <p>제가 맡은 모든 아이들의 성적이 향상 되었습니다 만족하지 못할 시 환불해드립니다</p>
-                            <p>강남구 개포동</p>
-                            <p>2024.07.01</p>
-                        </td>
-                        <td><button><img src="../../../static/image/class_list_pick_n.png"></button>
-                            <p><a href="../html/child/studyDetail.html">자세히 보기</a></p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><img src="../../../static/image/class_list_pro.png"></td>
-                        <td>
-                            <div>
-                                <p>유가람</p><img src="../../../static/image/4.5rating.png">
-                                <p>(87)</p>
-                            </div>
-                            <p>모든아이의 교육을 책임집니다!</p>
-                            <p>제가 맡은 모든 아이들의 성적이 향상 되었습니다 만족하지 못할 시 환불해드립니다</p>
-                            <p>강남구 개포동</p>
-                            <p>2024.07.01</p>
-                        </td>
-                        <td><button><img src="../../../static/image/class_list_pick_n.png"></button>
-                            <p><a href="../html/child/studyDetail.html">자세히 보기</a></p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><img src="../../../static/image/class_list_pro.png"></td>
-                        <td>
-                            <div>
-                                <p>유가람</p><img src="../../../static/image/4.5rating.png">
-                                <p>(87)</p>
-                            </div>
-                            <p>모든아이의 교육을 책임집니다!</p>
-                            <p>제가 맡은 모든 아이들의 성적이 향상 되었습니다 만족하지 못할 시 환불해드립니다</p>
-                            <p>강남구 개포동</p>
-                            <p>2024.07.01</p>
-                        </td>
-                        <td><button><img src="../../../static/image/class_list_pick_n.png"></button>
-                            <p><a href="../html/child/studyDetail.html">자세히 보기</a></p>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <!-- 페이징 처리 부분 -->
-            <div class="class_list_btn">
-                <button><img src="../../../static/image/pro_button_pre.png"></button>
-                <ul>
-                    <li><button>1</button></li>
-                    <li><button>2</button></li>
-                    <li><button>3</button></li>
-                </ul>
-                <button><img src="../../../static/image/pro_button_next.png"></button>
+                <form>
+                    <input type="text" placeholder="검색어를 입력해주세요">
+                    <input type="image" th:src="@{/images/comu_search.png}" alt="검색하기">
+                </form>
             </div>
         </div>
+
+        <!-- 테이블 위 바 -->
+        <div>
+            <p>강사 프로필</p>
+            <p>내용</p>
+        </div>
+
+        <table>
+            <tbody>
+            <!-- 실제로는 반복돌릴 리스트 보기 편하게 다 붙여놓음 -->
+            <tr th:each="classList : ${classLists}" th:object="${classList}">
+                <input type="hidden" th:value="*{proNumber}">
+                <td><img th:src="*{proProfileImageUrl}"></td>
+                <td>
+                    <div>
+                        <p th:text="*{proName}"></p>
+                        <!--리뷰 점수와 갯수만 보여주자-->
+                        <p th:text="'('+ *{reviewCount} +')'"></p>
+                    </div>
+                    <p th:text="*{className}"></p>
+                    <p th:text="*{classContent}"></p>
+                    <p th:text="*{proAddress}"></p>
+                    <p th:text="*{classRegisterDate}"></p>
+                </td>
+                <td>
+                <td><button><img th:src="@{/images/class_list_pick_n.png}"></button>
+                    <p><a href="../html/child/studyDetail.html">자세히 보기</a></p>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <<!-- 페이징 처리 부분 -->
+        <div class="class_list_btn">
+            <button><img th:src="@{images/pro_button_pre.png}"></button>
+            <ul>
+                <li><button>1</button></li>
+                <li><button>2</button></li>
+                <li><button>3</button></li>
+            </ul>
+            <button><img th:src="@{/images/pro_button_next.png}"></button>
+        </div>
     </div>
+</div>
+<div th:replace="~{/layout/footer :: footer}"></div>
 </body>
 <script src="http://code.jquery.com/jquery-1.9.0rc1.js"></script>
-<script src="../../../static/js/motion.js"></script>
+<script th:src="@{/js/motion.js}"></script>
+<script>
+    // 버튼 클릭 시 css 적용 바꾸기
+    // 부모요소에서 가져오는 class
+    // 페이지 로딩 후 실행될 함수
+    document.addEventListener("DOMContentLoaded", function() {
+        // 각 링크 요소에 클릭 이벤트 리스너 추가
+        document.getElementById("one").addEventListener("click", function() {
+            // 다른 링크들의 폰트 색상 초기화
+            resetFontColors();
+            // 클릭된 링크의 폰트 색상 변경
+            this.style.color = "#048D3B";
+            // 추가적으로 필요한 동작을 여기에 작성할 수 있습니다.
+        });
 
+        document.getElementById("two").addEventListener("click", function() {
+            resetFontColors();
+            this.style.color = "#048D3B";
+        });
+
+        document.getElementById("three").addEventListener("click", function() {
+            resetFontColors();
+            this.style.color = "#048D3B";
+        });
+
+        document.getElementById("four").addEventListener("click", function() {
+            resetFontColors();
+            this.style.color = "#048D3B";
+        });
+
+        document.getElementById("five").addEventListener("click", function() {
+            resetFontColors();
+            this.style.color = "#048D3B";
+        });
+
+        // 폰트 색상을 초기화하는 함수
+        function resetFontColors() {
+            var links = document.querySelectorAll(".category a");
+            links.forEach(function(link) {
+                link.style.color = ""; // 기본 값으로 설정
+            });
+        }
+    });
+</script>
 </html>

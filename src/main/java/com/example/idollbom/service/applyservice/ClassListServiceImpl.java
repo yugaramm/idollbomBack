@@ -13,12 +13,17 @@ public class ClassListServiceImpl implements ClassListService {
     private final ClassListMapper classListMapper;
 
     @Override
-    public List<ClassListDTO> findAllClass() {
-        return classListMapper.findAllClass();
+    public List<ClassListDTO> findAllClass(String category) {
+        return classListMapper.findAllClass(category);
     }
 
     @Override
-    public int classCount() {
-        return classListMapper.classCount();
+    public int classCount(String category) {
+        return classListMapper.classCount(category);
+    }
+
+    @Override
+    public List<ClassListDTO> searchClassList(String searchWord, String searchType, String category) {
+        return classListMapper.searchClassList(searchWord, searchType, category);
     }
 }

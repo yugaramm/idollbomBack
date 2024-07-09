@@ -6,13 +6,46 @@
     <select id="classCount">
         select count(*)
         from class
-        where class_category_small = '등/하원'
+        where class_category_small = #{category}
     </select>
+
     <!-- 소카에 대한 전문가 리스트 가져오는 select -->
     <select id="findAllClass">
-        SELECT p.PRO_PROFILE_IMAGE_URL, p.PRO_NAME, C.CLASS_NAME, C.CLASS_CONTENT, P.PRO_ADDRESS
-        FROM PRO p JOIN CLASS c
-        ON p.PRO_NUMBER = 11
-        AND c.CLASS_CATEGORY_SMALL = '등/하원'
+        SELECT p.PRO_NUMBER, p.PRO_PROFILE_IMAGE_URL , p.PRO_NAME, C.CLASS_NAME, C.CLASS_CONTENT, C.CLASS_CATEGORY_SMALL, P.PRO_ADDRESS,
+               TO_CHAR(C.CLASS_REGISTER_DATE, 'YYYY"년 "MM"월 "DD"일') as CLASS_REGISTER_DATE, COALESCE(COUNT(v.CLASS_NUMBER), 0) AS REVIEW_COUNT
+        FROM PRO p
+                 JOIN CLASS c ON p.PRO_NUMBER = C.PRO_NUMBER AND c.CLASS_CATEGORY_SMALL = #{category}
+                 LEFT JOIN REVIEW v ON v.CLASS_NUMBER = C.CLASS_NUMBER
+        GROUP BY p.PRO_NUMBER, p.PRO_PROFILE_IMAGE_URL , p.PRO_NAME, C.CLASS_NAME, C.CLASS_CONTENT, C.CLASS_CATEGORY_SMALL, P.PRO_ADDRESS,
+                 C.CLASS_REGISTER_DATE
+        ORDER BY c.CLASS_REGISTER_DATE
+    </select>
+
+    <!-- 검색 기능을 구현하는 select -->
+    <select id="searchClassList">
+        SELECT p.PRO_NUMBER, p.PRO_PROFILE_IMAGE_URL , p.PRO_NAME, c.CLASS_NAME, c.CLASS_CONTENT, c.CLASS_CATEGORY_SMALL, p.PRO_ADDRESS,
+               TO_CHAR(c.CLASS_REGISTER_DATE, 'YYYY"년 "MM"월 "DD"일') as CLASS_REGISTER_DATE, COALESCE(COUNT(v.CLASS_NUMBER), 0) AS REVIEW_COUNT
+        FROM PRO p
+         JOIN CLASS c ON p.PRO_NUMBER = c.PRO_NUMBER AND c.CLASS_CATEGORY_SMALL = #{category}
+         LEFT JOIN REVIEW v ON v.CLASS_NUMBER = c.CLASS_NUMBER
+        <where>
+            <if test="searchWord !=null">
+                <choose>
+                    <when test="searchType == 'title'">
+                        c.CLASS_NAME LIKE '%' || #{searchWord} || '%'
+                    </when>
+                    <when test="searchType == 'content'">
+                        c.CLASS_CONTENT LIKE '%' || #{searchWord} || '%'
+                    </when>
+                    <when test="searchType == 'all'">
+                        c.CLASS_NAME LIKE '%' || #{searchWord} || '%' or c.CLASS_CONTENT LIKE '%' || #{searchWord} || '%'
+                    </when>
+                </choose>
+            </if>
+        </where>
+        <if test="searchWord != null">
+            GROUP BY p.PRO_NUMBER, p.PRO_PROFILE_IMAGE_URL, p.PRO_NAME, c.CLASS_NAME, c.CLASS_CONTENT, c.CLASS_CATEGORY_SMALL, p.PRO_ADDRESS, c.CLASS_REGISTER_DATE
+            ORDER BY CLASS_REGISTER_DATE
+        </if>
     </select>
 </mapper>
